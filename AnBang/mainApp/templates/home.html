@@ -42,8 +42,16 @@
                 map: map
             });
 
+            var url = [
+                '<div>',
+                    '<a href="/building_detail/', buildings[i]['id'], '">',
+                        buildings[i]['name'],
+                    '</a>',
+                '</div>'
+            ]
+
             var infoWindow = new naver.maps.InfoWindow({
-                content: '<div style="width:150px;text-align:center;padding:10px;">"'+ buildings[i]['name'] +'"</div>'
+                content: url.join('')
             });
 
             markers.push(marker);
