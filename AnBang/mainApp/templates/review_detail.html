@@ -60,6 +60,11 @@
 
     <p>(댓글 기능 어떻게 넣지!)</p>
     
+    {% if user == review.user_email %}
+        <a href="{% url 'review_modify' review.pk %}">리뷰 수정</a>
+        <a href="{% url 'review_delete' review.pk %}">리뷰 삭제</a>
+    {% endif %}
+
     <div class="buttons">
       <a href="{% url 'home' %}">홈으로</a>
       {% comment %} <a href="{% url 'reviews' building.pk %}">뒤로 가기(버튼)</a> {% endcomment %}

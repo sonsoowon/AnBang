@@ -30,11 +30,16 @@ urlpatterns = [
     path('review_list/<int:building_id>', views.review_list, name='review_list'),
     path('review_detail/<int:review_id>', views.review_detail, name='review_detail'),
     path('review_create/<int:building_id>', views.review_create, name='review_create'),
+    
+    # 리뷰 수정 삭제 아직 구현 X
+    path('review_modify/<int:review_id>', views.review_modify, name='review_modify'),
+    path('review_delete/<int:review_id>', views.review_delete, name='review_delete'),
 
     
     path('search', views.Search.as_view(), name='search'),
     path('result', views.Result.as_view(), name='result'),
 
+    path('mypage', views.mypage, name='mypage'),
     path('logout', logout, name='logout'),
     path('', include('allauth.urls')),
 ]

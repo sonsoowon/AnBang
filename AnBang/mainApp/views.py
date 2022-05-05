@@ -117,6 +117,26 @@ def review_create(request, building_id):
     #         return redirect('home')
     #     return render(request, 'review_create.html', {'building': None})
 
+def review_modify(request, review_id):
+  pass
+
+def review_delete(request, review_id):
+  pass
+
+
+@login_required
+def mypage(request):
+  if not request.user.is_authenticated:
+    return redirect('login')
+  
+  my_reviews = Review.objects.filter(user_email=request.user)
+  my_picks = Pick.objects.filter(user_email=request.user)
+
+  return render(request, 'mypage.html', {
+    'my_reviews': my_reviews,
+    'my_picks': my_picks
+  })
+
 class Search(TemplateView):
     template_name= 'search.html'
 
@@ -131,3 +151,5 @@ class Result(ListView):
             Q(name__icontains=query) | Q(address__icontains=query)
         )
         return object_list
+
+
