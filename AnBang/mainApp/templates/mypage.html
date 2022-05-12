@@ -17,6 +17,7 @@
         {% endfor %}
     </ul>
 
+    {% comment %}
     <h2>내가 찜한 건물</h2>
     <ul>
         {% for pick in my_picks %}
@@ -25,7 +26,11 @@
         </li>
         {% endfor %}
     </ul>
+    {% endcomment %}
     {% endif %}
+
+    <a href="{% url 'home' %}">홈으로</a>
+    
     
 </body>
 </html>

@@ -42,4 +42,5 @@ urlpatterns = [
     path('mypage', views.mypage, name='mypage'),
     path('logout', logout, name='logout'),
     path('', include('allauth.urls')),
+    path('login_required', views.login_required, name='login_required')
 ]

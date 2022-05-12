@@ -85,10 +85,9 @@ def review_detail(request,  review_id):
     return render(request, 'review_detail.html', {'review': review})
 
 
-@login_required
 def review_create(request, building_id):
     if not request.user.is_authenticated:
-        return redirect('login')
+      return redirect('login_required')
 
     building = Building.objects.get(pk=building_id)
     conn_user = User.objects.get(email=request.user)
@@ -118,16 +117,33 @@ def review_create(request, building_id):
     #     return render(request, 'review_create.html', {'building': None})
 
 def review_modify(request, review_id):
-  pass
+  review = Review.objects.filter(pk=review_id)
+
+  if request.method == "POST":  
+    review.update(
+      host = request.POST['host'],
+      soundproof = request.POST['soundproof'],
+      water_pressure = request.POST['water_pressure'],
+      new = request.POST['new'],
+      memo = request.POST['memo'],
+      rate = request.POST['rate']
+    )
+    return redirect('review_detail', review_id)
+
+  return render(request, 'review_edit.html', {'review': review[0]})
+  
+
+  
 
 def review_delete(request, review_id):
-  pass
+  review = Review.objects.get(pk=review_id)
+  review.delete()
+  return redirect('mypage')
 
 
-@login_required
 def mypage(request):
   if not request.user.is_authenticated:
-    return redirect('login')
+    return redirect('login_required')
   
   my_reviews = Review.objects.filter(user_email=request.user)
   my_picks = Pick.objects.filter(user_email=request.user)
@@ -136,6 +152,10 @@ def mypage(request):
     'my_reviews': my_reviews,
     'my_picks': my_picks
   })
+
+def login_required(request):
+  return render(request, 'login_required.html')
+
 
 class Search(TemplateView):
     template_name= 'search.html'

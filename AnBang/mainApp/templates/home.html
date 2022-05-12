@@ -13,11 +13,11 @@
         {% load socialaccount %}
         {% if user.is_authenticated %}
         <p>안녕하세요 {{user}} 님!</p>
-        <a href="{% url 'mypage' %}">마이페이지</a>
         <a href="{% url 'logout' %}">로그아웃</a>
         {% else %}
         <a href="{% provider_login_url 'google' %}">구글 로그인</a>
         {% endif %}
+        <a href="{% url 'mypage' %}">마이페이지</a>
     </header>
     <div>
         <a href="{% url 'search' %}">건물 검색</a>
